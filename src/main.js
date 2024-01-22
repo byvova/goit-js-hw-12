@@ -11,6 +11,14 @@ const gallery = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 const loadMoreButton = document.querySelector('.load-more');
 
+let currentPage = 1;
+const perPage = 40;
+let searchQuery = '';
+let allHits = [];
+let isFirstLoad = true;
+
+let cardHeight = 0;
+
 const options = {
     captionsData: 'alt',
     captionDelay: 250,
@@ -91,13 +99,7 @@ form.addEventListener('submit', async (event) => {
     }
 });
 
-let currentPage = 1;
-const perPage = 40;
-let searchQuery = '';
-let allHits = [];
-let isFirstLoad = true;
 
-let cardHeight = 0;
 
 loadMoreButton.addEventListener('click', async () => {
 
@@ -110,7 +112,7 @@ loadMoreButton.addEventListener('click', async () => {
             isFirstLoad = false;
         }
 
-        searchQuery = encodeURIComponent(input.value.trim());
+        
         const url = `https://pixabay.com/api/?key=${API_KEY}&q=${searchQuery}&page=${currentPage}&per_page=${perPage}`;
         const response = await axios.get(url);
 
@@ -173,7 +175,11 @@ loadMoreButton.addEventListener('click', async () => {
             loadMoreButton.style.display = 'block';
         }
     } catch (error) {
-        console.error('Помилка при отриманні додаткових даних:', error);
+        console.error('Error fetching additional data:', error);
+        iziToast.error({
+            title: 'Error',
+            message: error.message,
+        });
     }
 });
 
