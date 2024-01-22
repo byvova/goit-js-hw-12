@@ -11,7 +11,7 @@ const gallery = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 const loadMoreButton = document.querySelector('.load-more');
 
-let lightbox = new SimpleLightbox('.gallery a', options);
+
 
 let currentPage = 1;
 const perPage = 40;
@@ -26,10 +26,13 @@ const options = {
     captionDelay: 250,
 };
 
+let lightbox = new SimpleLightbox('.gallery a', options);
+
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     try {
+        currentPage = 1;
         searchQuery = encodeURIComponent(input.value.trim());
 
         if (!searchQuery) {
