@@ -26,10 +26,11 @@ const options = {
     captionDelay: 250,
 };
 
-let lightbox = new SimpleLightbox('.gallery a', options);
+let lightbox;
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    allHits = [];
     currentPage = 1;
     gallery.innerHTML = '';
     try {
@@ -53,6 +54,7 @@ form.addEventListener('submit', async (event) => {
         }
 
         const hits = response.data.hits;
+        allHits = [...hits];
 
         loader.style.display = 'none';
         gallery.innerHTML = '';
@@ -82,6 +84,8 @@ form.addEventListener('submit', async (event) => {
                 </div>
             </li>`, "");
 
+        lightbox = new SimpleLightbox('.gallery a', options);
+        
         if (hits.length >= perPage) {
             loadMoreButton.style.display = 'block';
         } else {
@@ -143,7 +147,7 @@ loadMoreButton.addEventListener('click', async () => {
         allHits = [...allHits, ...additionalHits];
         
 
-        gallery.innerHTML = allHits.slice(0, currentPage * perPage).reduce((html, hit) => html + `
+        gallery.innerHTML = allHits.reduce((html, hit) => html + `
             <li class="gallery-item">
                 <a class="gallery-link" href="${hit.webformatURL}">
                     <img class="gallery-image" src="${hit.previewURL}" alt="${hit.tags}" />
@@ -158,7 +162,8 @@ loadMoreButton.addEventListener('click', async () => {
                     <p class="text">${hit.comments}</p>
                     <p class="text">${hit.downloads}</p>
                 </div>
-            </li>`, "");
+            </li>`, "")+ gallery.innerHTML;
+
         
         const firstGalleryItem = document.querySelector('.gallery-item');
         if (firstGalleryItem) {
