@@ -162,7 +162,7 @@ loadMoreButton.addEventListener('click', async () => {
                     <p class="text">${hit.comments}</p>
                     <p class="text">${hit.downloads}</p>
                 </div>
-            </li>`, "")+ gallery.innerHTML;
+            </li>`, "");
 
         
         const firstGalleryItem = document.querySelector('.gallery-item');
