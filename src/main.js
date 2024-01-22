@@ -170,8 +170,6 @@ loadMoreButton.addEventListener('click', async () => {
 
         lightbox.refresh();
 
-        currentPage++;
-
         if (currentPage * perPage >= response.data.totalHits) {
             loadMoreButton.style.display = 'none';
             iziToast.info({
