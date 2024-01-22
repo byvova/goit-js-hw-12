@@ -30,9 +30,10 @@ let lightbox = new SimpleLightbox('.gallery a', options);
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
-
+    currentPage = 1;
+    gallery.innerHTML = '';
     try {
-        currentPage = 1;
+        
         searchQuery = encodeURIComponent(input.value.trim());
 
         if (!searchQuery) {
