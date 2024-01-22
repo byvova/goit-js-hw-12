@@ -107,6 +107,7 @@ form.addEventListener('submit', async (event) => {
 
 
 loadMoreButton.addEventListener('click', async () => {
+    currentPage++;
 
     try {
         loader.style.display = 'block';
