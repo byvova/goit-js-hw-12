@@ -11,6 +11,8 @@ const gallery = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 const loadMoreButton = document.querySelector('.load-more');
 
+let lightbox = new SimpleLightbox('.gallery a', options);
+
 let currentPage = 1;
 const perPage = 40;
 let searchQuery = '';
@@ -190,5 +192,3 @@ function smoothScrollBy(x, y) {
         behavior: 'smooth'
     });
 }
-
-const lightbox = new SimpleLightbox('.gallery a', options);
