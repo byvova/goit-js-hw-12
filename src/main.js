@@ -17,7 +17,6 @@ let currentPage = 1;
 const perPage = 40;
 let searchQuery = '';
 let allHits = [];
-let isFirstLoad = true;
 
 let cardHeight = 0;
 
@@ -52,8 +51,9 @@ form.addEventListener('submit', async (event) => {
         if (response.status !== 200) {
             throw new Error('Failed to fetch images. Please try again later.');
         }
-
+        console.log(response);
         const hits = response.data.hits;
+        console.log(hits);
         allHits = [...hits];
 
         loader.style.display = 'none';
